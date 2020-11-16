@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "anagram-frontend"
+  "defaultProject": "anagram-frontend",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,0 +1,49 @@
+<form [formGroup]="dashboardForm" (ngSubmit)="checkAnagram()">
+  <div class="form-row mt-5">
+    <div class="form-group col-md-4">
+      <label>First Word</label>
+      <input
+        [(ngModel)]="dashboardUserData.firstData"
+        formControlName="firstData"
+        type="text"
+        placeholder="Enter Text"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.firstData.errors }"
+        required
+        minlength="4"
+      />
+      <div *ngIf="submitted && f.firstData.errors" class="text-danger">
+        <div *ngIf="f.firstData.errors.required">Text is required</div>
+        <div *ngIf="f.firstData.errors.pattern">
+          Only aplhabets and spaces allowed
+        </div>
+        <div *ngIf="f.firstData.errors.maxlength">
+          Text cannot be more than 50 characters
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label>Second Word</label>
+      <input
+        [(ngModel)]="dashboardUserData.secondData"
+        formControlName="secondData"
+        placeholder="Enter Text"
+        type="text"
+        class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f.secondData.errors }"
+        required
+        minlength="4"
+      />
+      <div *ngIf="submitted && f.secondData.errors" class="text-danger">
+        <div *ngIf="f.secondData.errors.required">Text is required</div>
+        <div *ngIf="f.secondData.errors.pattern">
+          Only aplhabets and spaces allowed
+        </div>
+        <div *ngIf="f.secondData.errors.maxlength">
+          Text cannot be more than 50 characters
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary">Check Anagram</button>
+</form>
