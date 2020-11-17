@@ -35,12 +35,15 @@ export class LoginComponent implements OnInit {
     this.AUTH.loginUser(this.loginUserData)
       .subscribe(
         res => {
-          localStorage.setItem('token', res.token);
-          localStorage.setItem('email', res.email);
-          localStorage.setItem('code', res.code);
-          this.notifyService.showSuccess(`${res.email} loggedIn Successfully`, '');
-          this.loginUserData = { email: '', password: '' };
-          this.ROUTER.navigate(['/dashboard']);
+          if (res.value) {
+            localStorage.setItem('token', res.token);
+            localStorage.setItem('email', res.email);
+            this.notifyService.showSuccess(`${res.email} loggedIn Successfully`);
+            this.loginUserData = { email: '', password: '' };
+            this.ROUTER.navigate(['/dashboard']);
+          } else {
+            this.notifyService.showError(res.text, 'Login Failure:');
+          }
         },
         err => {
           this.notifyService.showError(err.error, 'Login Failure:');

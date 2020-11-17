@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   submitted = false;
   countries: any = [];
-  constructor(private formBuilder: FormBuilder, private ROUTER: Router, private _auth: AuthService,
+  constructor(private formBuilder: FormBuilder, private ROUTER: Router, private AUTH: AuthService,
     private notifyService: NotificationService) { }
 
   ngOnInit() {
@@ -35,19 +35,16 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this._auth.checkUser(this.registerUserData.email)
+    this.AUTH.checkUser(this.registerUserData.email)
       .subscribe(
         response => {
           if (!response) {
-            this._auth.registerUser(this.registerUserData)
+            this.AUTH.registerUser(this.registerUserData)
               .subscribe(
                 res => {
-                  localStorage.setItem('token', res.token);
-                  localStorage.setItem('email', res.email);
-                  localStorage.setItem('code', res.code);
                   this.notifyService.showSuccess(`${res.email} successfully registered`, 'Notification:');
                   this.registerUserData = { email: '', password: '' };
-                  this.ROUTER.navigate(['/dashboard']);
+                  this.ROUTER.navigate(['/login']);
                 },
                 err => {
                   this.notifyService.showError(err.message, 'Registeration Failure:');

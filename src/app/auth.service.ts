@@ -8,11 +8,24 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class AuthService {
 
-  private registerUrl = 'https://meowing-sulfuric-hole.glitch.me/api/register';
-  private loginUrl = 'https://meowing-sulfuric-hole.glitch.me/api/login';
-  private checkUserUrl = 'https://meowing-sulfuric-hole.glitch.me/api/checkUser';
+  private registerUrl = 'http://localhost:9000/register';
+  private popularCountsUrl = 'http://localhost:9000/counts';
+  private verifyUrl = 'http://localhost:9000/verify';
+  private checkAnagram = 'http://localhost:9000/check-anagram';
+  private loginUrl = 'http://localhost:9000/login';
+  private checkUserUrl = 'http://localhost:9000/checkUser';
 
   constructor(private http: HttpClient, private router: Router, private notifyService: NotificationService) { }
+
+
+  popularCounts() {
+    return this.http.get<any>(this.popularCountsUrl);
+  }
+
+  verifyToken(token: any) {
+    const params = new HttpParams().set('token', token);
+    return this.http.get<any>(this.verifyUrl, { params });
+  }
 
   registerUser(user: any) {
     return this.http.post<any>(this.registerUrl, user);
@@ -30,13 +43,12 @@ export class AuthService {
   logOutUser() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
-    localStorage.removeItem('code');
     this.notifyService.showSuccess('LoggedOut Successfully', '');
     this.router.navigate(['/login']);
   }
 
   loggedIn() {
-    return !!localStorage.getItem('token');
+    return localStorage.getItem('token') !== null ? true : false;
   }
 
   getToken() {
@@ -44,6 +56,6 @@ export class AuthService {
   }
 
   checkAnagramForUser(data: any) {
-    return this.http.post<any>(this.registerUrl, data);
+    return this.http.post<any>(this.checkAnagram, data);
   }
 }

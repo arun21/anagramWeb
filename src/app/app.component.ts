@@ -17,6 +17,6 @@ export class AppComponent {
   }
 
   public localStorageItem(id: string) {
-    return localStorage.getItem(id);
+    return localStorage.getItem(id) ? localStorage.getItem(id) : null;
   }
 }

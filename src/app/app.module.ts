@@ -19,7 +19,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
