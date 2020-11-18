@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { NotificationService } from '../notification.service';
-
+import { AuthService } from '../services/auth.service';
+import { NotificationService } from '../services/notification.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -45,12 +44,12 @@ export class DashboardComponent implements OnInit {
       );
   }
 
-  get f() { return this.dashboardForm.controls; }
+  get getDashboardControls() { return this.dashboardForm.controls; }
 
   checkAnagram() {
     this.submitted = true;
 
-    // stop here if form is invalid
+    // if form is invalid
     if (this.dashboardForm.invalid) {
       return;
     }
@@ -80,6 +79,4 @@ export class DashboardComponent implements OnInit {
         }
       );
   }
-
-
 }
