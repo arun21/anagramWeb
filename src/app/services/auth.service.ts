@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationService } from './notification.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { dev } from '../config/service';
+import { dev, prod } from '../config/service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private registerUrl = dev.baseUrl + dev.endpoint.registerUrl;
-  private popularCountsUrl = dev.baseUrl + dev.endpoint.popularCountsUrl;
-  private verifyUrl = dev.baseUrl + dev.endpoint.verifyUrl;
-  private checkAnagram = dev.baseUrl + dev.endpoint.checkAnagram;
-  private loginUrl = dev.baseUrl + dev.endpoint.loginUrl;
-  private checkUserUrl = dev.baseUrl + dev.endpoint.checkUserUrl;
+  private registerUrl = prod.baseUrl + prod.endpoint.registerUrl;
+  private popularCountsUrl = prod.baseUrl + prod.endpoint.popularCountsUrl;
+  private verifyUrl = prod.baseUrl + prod.endpoint.verifyUrl;
+  private checkAnagram = prod.baseUrl + prod.endpoint.checkAnagram;
+  private loginUrl = prod.baseUrl + prod.endpoint.loginUrl;
+  private checkUserUrl = prod.baseUrl + prod.endpoint.checkUserUrl;
 
   constructor(private http: HttpClient, private router: Router, private notifyService: NotificationService) { }
 
